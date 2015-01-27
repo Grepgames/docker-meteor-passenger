@@ -11,14 +11,41 @@
    * old `GITHUB_DEPLOY_KEY` is also supported but deprecated
  * Non-root location of Meteor tree; the script will search for the first .meteor directory
  * PhantomJS pre-installed to support `spiderable` package
+ * embed nginx (phusion-passenger)
 
 ## Versions:
 
 Regardless of the version number of the tool included in this package, your application will run
 on whatever version of Meteor it is configured to run under.
 
+## Example nginx config
+
+`MeteorAppName/private/nginx.conf` or `-v configDirName/nginx.conf:/etc/nginx/sites-enabled/nginx.conf`
+
+```
+server {
+    listen 80;
+    server_name http://testsite.com;
+    root /var/www/public;  # do not modify root directory
+
+    passenger_enabled on;
+    passenger_user app;
+    passenger_sticky_sessions on;
+    passenger_set_cgi_param MONGO_URL mongodb://mymongoserver.com:27017/database;
+    passenger_set_cgi_param MONGO_OPLOG_URL mongodb://mymongoserver.com:27017/database;
+    passenger_set_cgi_param ROOT_URL http://testsite.com;
+
+    # Set these ONLY if your app is a Meteor bundle!
+    passenger_app_type node;
+    passenger_startup_file bundle/main.js;
+}
+
+```
+
+If you write params like MONGO_ULR in nginx.conf, You can't overide docker environment variables.
+
 ## Example run:
 
-`docker run --rm -e ROOT_URL=http://testsite.com -e REPO=https://github.com/yourName/testsite -e BRANCH=testing -e MONGO_URL=mongodb://mymongoserver.com:27017 ulexus/meteor`
+`docker run --rm -p 8000:80 -e ROOT_URL=http://testsite.com -e REPO=git@github.com:yourName/testsite.co.git" -e DEPLOY_KEY=/home/core/.ssh/id_rsa -e BRANCH=testing -e MONGO_URL=mongodb://mymongoserver.com:27017 -v ~/.ssh/deploy_key:/home/core/.ssh/id_rsa -v ~/conf/nginx.conf:/etc/nginx/sites-enabled/nginx.conf`
 
 There is also a sample systemd unit file in the Github repository.

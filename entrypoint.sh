@@ -73,6 +73,11 @@ if [ -n "${REPO}" ]; then
       tar xf bundle.tar.gz -C ${APP_DIR}
    fi
    set -e
+
+   # nginx Config
+   if [ -e /usr/src/app/private/nginx.conf ]; then
+      cp /usr/src/app/private/nginx.conf /etc/nginx/sites-enabled/nginx.conf
+   fi
 fi
 
 if [ -n "${BUNDLE_URL}" ]; then
@@ -97,5 +102,5 @@ else
 fi
 
 # Run meteor
-cd ${APP_DIR}
-exec node ./main.js
+# Use baseimage-docker's init process.
+exec /sbin/my_init
