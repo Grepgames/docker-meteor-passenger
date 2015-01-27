@@ -1,3 +1,5 @@
+[![Docker Repository on Quay.io](https://quay.io/repository/grepgames/meteor/status "Docker Repository on Quay.io")](https://quay.io/repository/grepgames/meteor) Meteor for Development and Production Using Passenger
+
 ## Features:
 
  * Meteor 1.x package/bundle support
