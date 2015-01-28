@@ -44,7 +44,7 @@ server {
 
 ```
 
-If you write params like MONGO_ULR in nginx.conf, You can't overide docker environment variables.
+If you write params like MONGO_ULR in nginx.conf, docker environment variables can't overide it.
 
 ## Example run:
 
