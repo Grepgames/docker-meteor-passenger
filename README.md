@@ -33,9 +33,9 @@ server {
     passenger_enabled on;
     passenger_user app;
     passenger_sticky_sessions on;
-    passenger_set_cgi_param MONGO_URL mongodb://mymongoserver.com:27017/database;
-    passenger_set_cgi_param MONGO_OPLOG_URL mongodb://mymongoserver.com:27017/database;
-    passenger_set_cgi_param ROOT_URL http://testsite.com;
+    passenger_env_var MONGO_URL mongodb://mymongoserver.com:27017/database;
+    passenger_env_var MONGO_OPLOG_URL mongodb://mymongoserver.com:27017/database;
+    passenger_env_var ROOT_URL http://testsite.com;
 
     # Set these ONLY if your app is a Meteor bundle!
     passenger_app_type node;
@@ -48,6 +48,6 @@ If you write params like MONGO_ULR in nginx.conf, docker environment variables c
 
 ## Example run:
 
-`docker run --rm -p 8000:80 -e ROOT_URL=http://testsite.com -e REPO=git@github.com:yourName/testsite.co.git" -e DEPLOY_KEY=/home/core/.ssh/id_rsa -e BRANCH=testing -e MONGO_URL=mongodb://mymongoserver.com:27017 -v ~/.ssh/deploy_key:/home/core/.ssh/id_rsa -v ~/conf/nginx.conf:/etc/nginx/sites-enabled/nginx.conf`
+`docker run --rm -p 8000:80 -e ROOT_URL=http://testsite.com -e REPO=git@github.com:yourName/testsite.co.git" -e DEPLOY_KEY=/home/core/.ssh/id_rsa -e BRANCH=testing -e MONGO_URL=mongodb://mymongoserver.com:27017 -v ~/.ssh/deploy_key:/home/core/.ssh/id_rsa -v ~/conf/nginx.conf:/etc/nginx/sites-enabled/nginx.conf quay.io/grepgames/meteor`
 
 There is also a sample systemd unit file in the Github repository.
