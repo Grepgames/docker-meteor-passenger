@@ -87,6 +87,11 @@ if [ -n "${BUNDLE_URL}" ]; then
    tar xf /tmp/bundle.tgz -C ${APP_DIR}
 fi
 
+if [ -n "${BUNDLE_FILE}" ]; then
+   echo "Extract Meteor bundle..."
+   tar xf ${BUNDLE_FILE} -C ${APP_DIR}
+fi
+
 # See if the actual bundle is in the bundle
 # subdirectory (default)
 if [ -d ${APP_DIR}/bundle ]; then
