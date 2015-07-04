@@ -74,11 +74,6 @@ if [ -n "${REPO}" ]; then
       tar xf bundle.tar.gz -C ${APP_DIR}
    fi
    set -e
-
-   # nginx Config
-   if [ -e /usr/src/app/private/nginx.conf ]; then
-      cp /usr/src/app/private/nginx.conf /etc/nginx/sites-enabled/nginx.conf
-   fi
 fi
 
 if [ -n "${BUNDLE_URL}" ]; then
@@ -90,6 +85,11 @@ fi
 if [ -n "${BUNDLE_FILE}" ]; then
    echo "Extract Meteor bundle..."
    tar xf ${BUNDLE_FILE} -C ${APP_DIR}
+fi
+
+# nginx Config
+if [ -e ${APP_DIR}/bundle/programs/server/assets/app/nginx.conf ]; then
+   cp ${APP_DIR}/bundle/programs/server/assets/app/nginx.conf /etc/nginx/sites-enabled/nginx.conf
 fi
 
 # See if the actual bundle is in the bundle
