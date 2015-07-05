@@ -87,6 +87,11 @@ if [ -n "${BUNDLE_FILE}" ]; then
    tar xf ${BUNDLE_FILE} -C ${APP_DIR}
 fi
 
+# public folder symbolic link
+if [ -e ${APP_DIR}/bundle/programs/web.browser/app ]; then
+   ln -s ${APP_DIR}/bundle/programs/web.browser/app ${APP_DIR}/public
+fi
+
 # nginx Config
 if [ -e ${APP_DIR}/bundle/programs/server/assets/app/nginx.conf ]; then
    cp ${APP_DIR}/bundle/programs/server/assets/app/nginx.conf /etc/nginx/sites-enabled/nginx.conf
