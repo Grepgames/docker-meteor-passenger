@@ -1,13 +1,14 @@
+# METEOR-VERSION 1.2.1
 FROM phusion/passenger-nodejs:latest
 MAINTAINER Haydn (https://github.com/Grepgames/docker-meteor-passenger)
 
 # node 0.12.x support
-RUN sed -i 's/node /node012 /g;' /etc/apt/sources.list.d/nodejs.list
+RUN curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
 
 RUN apt-get update && apt-get -y upgrade
 
 # Install git, curl, python, and phantomjs
-RUN apt-get install -y git curl python phantomjs
+RUN apt-get install -y git curl python nodejs phantomjs
 
 # Make sure we have a directory for the application
 RUN mkdir -p /var/www
