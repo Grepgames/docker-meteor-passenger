@@ -89,7 +89,7 @@ fi
 
 # public folder symbolic link
 if [ -e ${APP_DIR}/bundle/programs/web.browser/app ]; then
-   ln -s ${APP_DIR}/bundle/programs/web.browser/app ${APP_DIR}/public
+   ln -sfn ${APP_DIR}/bundle/programs/web.browser/app ${APP_DIR}/public
 fi
 
 # nginx Config
