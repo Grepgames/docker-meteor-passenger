@@ -1,5 +1,5 @@
 # METEOR-VERSION 1.2.1
-FROM phusion/passenger-nodejs:latest
+FROM phusion/passenger-nodejs:0.9.18
 MAINTAINER Haydn (https://github.com/Grepgames/docker-meteor-passenger)
 
 # node 0.12.x support
