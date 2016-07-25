@@ -2,7 +2,9 @@
 FROM phusion/passenger-nodejs:0.9.18
 MAINTAINER Haydn (https://github.com/Grepgames/docker-meteor-passenger)
 
-RUN apt-get update && apt-get -y upgrade
+RUN apt-get update && \
+    apt-get install -y -o Dpkg::Options::="--force-confold" passenger nginx-extras && \
+    apt-get -y upgrade
 
 # Install git, curl, python, and phantomjs
 RUN apt-get install -y git curl python phantomjs
